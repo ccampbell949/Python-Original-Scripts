@@ -1,0 +1,80 @@
+#Hangman Game
+
+   #  o
+   # /|\
+   # / \
+import random
+options = ('hello', 'goodbye', 'house', 'circus', 'animal') #list of words. Could be swapped 
+word = options[random.randint(0,4)]                         #for a long list.
+letters = list(word)#turns word letters into a list of letters
+
+
+def guessagain():
+    number = 0
+    
+    while number <= 5:
+       
+       nextguess = input('Guess another letter - ')
+       nextguess = nextguess.lower()
+           
+      
+       if nextguess in letters:
+             print('Correct! Guess another letter - ')
+             number += 1 
+             
+
+       elif nextguess not in letters:
+             print('Incorrect. Guess another letter - ')
+             number += 1 
+             
+
+       else:
+             print('Incorrect. Guess another letter - ')
+             number += 1 
+           
+       if number == 5:
+        print('''You are dead! \n The word i was thinking of was ''' + str(word).upper() )
+        playagain()
+
+def hangman():
+ 
+  print('The word I am thinking off has ' + str(len(letters)) + ' letters' )
+
+  guess = input('Guess a letter - ')
+  guess = guess.lower()
+
+  if guess in letters: #is guess in letter list
+     print('Correct!' )
+     guessagain()     
+
+  elif guess.isnumeric() == True: #numbers don't crash script
+     print('Please enter a letter')
+     guessagain()
+
+  else:
+     print('Incorrect. Please enter a letter') #covers any other inputs
+     guessagain()
+     
+    
+def playagain():
+  import sys
+  yesno = ('y', 'n')
+  again = input('Would you like to play another game? [y/n]')
+  again = again.lower()
+
+  if again not in yesno:
+    print('Please select a valid input: y/n ')
+    playagain()
+
+  elif again == yesno[0]:
+    hangman()
+
+  else:
+    print('Thanks for playing. Goodbye!')
+    sys.exit()
+
+
+hangman()    
+
+    
+
